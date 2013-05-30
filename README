@@ -1,0 +1,18 @@
+Fast lxml-based XML plist reader/editor/writer.
+
+ * Arrays and dictionaries are lazily loaded.
+ * Source data is internally maintained in an lxml document.
+
+
+Parsing speed using my iTunes library:
+
+    plist (http://pyug.at/Projekte/BinaryPlistLib):                 7.473s
+    plistlib (http://docs.python.org/2/library/plistlib.html):      7.420s
+    plistop (http://github.com/dw/plistop):                         0.428s
+
+
+Serializing speed using my iTunes library:
+
+    plist:          5.372s
+    plistlib:       5.444s
+    plistop:        0.253s
