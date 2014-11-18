@@ -2,10 +2,16 @@
 Fast lxml-based XML plist reader/editor.
 """
 
+import datetime
 import iso8601
 import lxml.etree
 
-__all__ = ['parse', 'factory', 'dumps']
+__all__ = ['parse', 'factory', 'dumps', 'dict', 'array']
+
+template = ('<?xml version="1.0" encoding="UTF-8"?>\n'
+            '<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" '
+             '"http://www.apple.com/DTDs/PropertyList-1.0.dtd">'
+            '<plist version="1.0"/>')
 
 
 def _elem(tag, text=None):
@@ -32,6 +38,9 @@ class PListArray(object):
 
     def __iter__(self):
         return (factory(e) for e in self.elem)
+
+    def append(self, other):
+        self.elem.append(collapse(other))
 
 
 class PListDict(object):
@@ -101,7 +110,7 @@ def collapse(v):
     elif isinstance(v, (list, PListArray)):
         parent = _elem('array')
         for subv in v:
-            parent.append(collapse(subv))
+            parent.append(subv)
         return parent
     elif isinstance(v, (dict, PListDict)):
         parent = _elem('dict')
@@ -140,5 +149,15 @@ def parse(fp):
 
 
 def dumps(obj):
-    return lxml.etree.tostring(obj.elem.getroottree().getroot(),
-                               encoding='UTF-8')
+    new_root = lxml.etree.fromstring(template)
+    new_root.append(obj.elem)
+    tree = new_root.getroottree()
+    return lxml.etree.tostring(tree, xml_declaration=True, encoding='UTF-8')
+
+
+def dict():
+    return PListDict(lxml.etree.Element('dict'))
+
+
+def array():
+    return PListArray(lxml.etree.Element('array'))
