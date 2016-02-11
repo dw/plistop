@@ -34,7 +34,10 @@ class PListArray(object):
         return factory(self.elem[idx])
 
     def __setitem__(self, idx, value):
-        self.elem[idx] = collapse(value)
+        if isinstance(idx, slice):
+            self.elem.__setitem__(idx, map(collapse, value))
+        else:
+            self.elem[idx] = collapse(value)
 
     def __iter__(self):
         return (factory(e) for e in self.elem)
