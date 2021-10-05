@@ -22,10 +22,10 @@ from setuptools import setup
 
 setup(
     name =          'plistop',
-    version =       '0.1',
+    version =       '0.2',
     description =   'Fast XML plist reader based on lxml.',
-    author =        'David Wilson',
-    author_email =  'dw@botanicus.net',
+    author =        'David Wilson, Émile Jetzer',
+    author_email =  'dw@botanicus.net,emile.jetzer@gmail.com',
     license =       'Apache 2.0',
     url =           'http://github.com/dw/plistop/',
     install_requires=['iso8601', 'lxml'],

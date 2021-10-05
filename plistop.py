@@ -35,7 +35,7 @@ class PListArray(object):
 
     def __setitem__(self, idx, value):
         if isinstance(idx, slice):
-            self.elem.__setitem__(idx, map(collapse, value))
+            self.elem.__setitem__(idx, list(map(collapse, value)))
         else:
             self.elem[idx] = collapse(value)
 
@@ -59,7 +59,7 @@ class PListDict(object):
                 return child.getnext()
 
     def __getitem__(self, key):
-        elem = self._findValue(unicode(key))
+        elem = self._findValue(str(key))
         if elem is None:
             raise KeyError(key)
         return factory(elem)
@@ -70,7 +70,7 @@ class PListDict(object):
             self.elem.remove(elem.getprevious())
             self.elem.remove(elem)
         collapsed = collapse(value)
-        self.elem.append(_elem('key', unicode(key)))
+        self.elem.append(_elem('key', str(key)))
         self.elem.append(collapsed)
 
     def get(self, key, default=None):
@@ -90,24 +90,24 @@ class PListDict(object):
         return (factory(e) for e in self.elem if e.tag != 'key')
 
     def values(self):
-        return list(self.itervalues())
+        return list(self.values())
 
     def iteritems(self):
         it = iter(self.elem)
-        return ((elem.text, factory(it.next())) for elem in it)
+        return ((elem.text, factory(next(it))) for elem in it)
 
 
 def collapse(v):
-    if isinstance(v, unicode):
+    if isinstance(v, str):
         return _elem('string', v)
     elif isinstance(v, float):
-        return _elem('real', unicode(v))
-    elif isinstance(v, (int, long)):
-        return _elem('integer', unicode(v))
+        return _elem('real', str(v))
+    elif isinstance(v, int):
+        return _elem('integer', str(v))
     elif isinstance(v, datetime.datetime):
         return _elem('date', v.isoformat())
     elif isinstance(v, bool):
-        return _elem(unicode(v).lower(), None)
+        return _elem(str(v).lower(), None)
     elif isinstance(v, str):
         return _elem('data', v.encode('base64'))
     elif isinstance(v, (list, PListArray)):
@@ -117,8 +117,8 @@ def collapse(v):
         return parent
     elif isinstance(v, (dict, PListDict)):
         parent = _elem('dict')
-        for key, value in v.iteritems():
-            parent.append(_elem('key', unicode(key)))
+        for key, value in v.items():
+            parent.append(_elem('key', str(key)))
             parent.append(collapse(value))
         return parent
     else:
