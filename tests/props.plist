@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>architecture</key>
+	<string>x86_64</string>
+	<key>changelog</key>
+	<string>https://raw.githubusercontent.com/linux-pam/linux-pam/master/NEWS</string>
+	<key>conf_files</key>
+	<array>
+		<string>/etc/environment</string>
+		<string>/etc/security/access.conf</string>
+		<string>/etc/security/group.conf</string>
+		<string>/etc/security/limits.conf</string>
+		<string>/etc/security/namespace.conf</string>
+		<string>/etc/security/pam_env.conf</string>
+		<string>/etc/security/time.conf</string>
+	</array>
+	<key>homepage</key>
+	<string>https://github.com/linux-pam/linux-pam</string>
+	<key>install-msg</key>
+	<data>V0FSTklORzogUEFNPj0xLjUuMCBoYXMgcmVtb3ZlZCB0aGUgcGFtX3RhbGx5IGFuZCBwYW1fdGFsbHkyIG1vZHVsZXMsCmFzIHdlbGwgYXMgdGhlIHBhbV9sYXN0bG9nIG1vZHVsZSBvbiBtdXNsLiBJZiB5b3UgaGF2ZSBhIGN1c3RvbSBQQU0KY29uZmlnLCB5b3Ugd2lsbCBuZWVkIHRvIGZpeCBpdCBpbW1lZGlhdGVseSBmb3IgdGhlc2UgY2hhbmdlcy4KCk90aGVyd2lzZSwgdGhlIHBhbS1iYXNlLTAuNCB1cGRhdGUgd2lsbCBoYXZlIGhhbmRsZWQgdGhlc2UgY2hhbmdlcyBmb3IKeW91LCB1bmxlc3MgeW91ciBYQlBTIGNvbmZpZyB1c2VzICJrZWVwY29uZj10cnVlIiwKInByZXNlcnZlPS9ldGMvcGFtLmQvc3lzdGVtLWxvZ2luIiBvciAicHJlc2VydmU9L2V0Yy9wYW0uZC8qIi4K</data>
+	<key>installed_size</key>
+	<integer>1670115</integer>
+	<key>license</key>
+	<string>BSD-3-Clause</string>
+	<key>maintainer</key>
+	<string>Érico Nogueira &lt;ericonr@disroot.org&gt;</string>
+	<key>pkgname</key>
+	<string>pam</string>
+	<key>pkgver</key>
+	<string>pam-1.5.2_2</string>
+	<key>run_depends</key>
+	<array>
+		<string>pam-base&gt;=0.4_1</string>
+		<string>pam-libs-1.5.2_2</string>
+		<string>glibc&gt;=2.32_1</string>
+	</array>
+	<key>shlib-requires</key>
+	<array>
+		<string>libpam.so.0</string>
+		<string>libc.so.6</string>
+		<string>libutil.so.1</string>
+		<string>libcrypt.so.1</string>
+	</array>
+	<key>short_desc</key>
+	<string>Flexible mechanism for authenticating users</string>
+	<key>source-revisions</key>
+	<string>pam:e85a1d741f</string>
+	<key>version</key>
+	<string>1.5.2_2</string>
+</dict>
+</plist>
